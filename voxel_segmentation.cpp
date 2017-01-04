@@ -2,7 +2,7 @@
 //	File:		 voxel_segmentation.cpp
 //	Author:		 Yusheng Xu, PF_Technische Universitaet Muechen (yusheng.xu@tum.de)
 //	Description: The voxel based segmentation for point cloud 
-//  Modified:    18.4.2016
+//  Modified:    15.11.2016
 //
 //  Copyright (c) 2016  Yusheng Xu (yusheng.xu@tum.de)
 //
