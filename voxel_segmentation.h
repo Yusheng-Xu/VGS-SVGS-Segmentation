@@ -68,7 +68,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 		{
 		}
 
-		//Destrction
+		//Destruction
 		~VoxelBasedSegmentation()
 		{
 		}
