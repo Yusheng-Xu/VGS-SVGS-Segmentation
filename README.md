@@ -12,4 +12,14 @@ The code depends on the following third party libraries:
 
 Reference:
 You can find more details about the VGS algorithm in our recent publication:
-Xu, Y., Tuttas, S., Hoegner, L. and Stilla, U., 2017. Geometric primitive extraction from point clouds of construction sites using voxel- and graph-based segmentation. IEEE Geoscience and Remote Sensing Letters, in press.
+
+@article{xu2017geometric,
+  title={Geometric Primitive Extraction From Point Clouds of Construction Sites Using VGS},
+  author={Xu, Yusheng and Tuttas, Sebastian and Hoegner, Ludwig and Stilla, Uwe},
+  journal={IEEE Geoscience and Remote Sensing Letters},
+  volume={14},
+  number={3},
+  pages={424--428},
+  year={2017},
+  publisher={IEEE}
+}
