@@ -1,4 +1,4 @@
-# Point-cloud-segmentation
+# Voxel- and Graph-based point-cloud-segmentation
 This is the source code for the algorithm of Voxel and Graph-based Segmentation (VGS).
 
 Environment:
