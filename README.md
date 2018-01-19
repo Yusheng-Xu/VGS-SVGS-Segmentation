@@ -23,7 +23,7 @@ You can find more details about the VGS algorithm in our recent publications:
 }
 
 @article{xu2017voxel,
-  title={VOXEL-AND GRAPH-BASED POINT CLOUD SEGMENTATION OF 3D SCENES USING PERCEPTUAL GROUPING LAWS.},
+  title={Voxel- and Graph-Based Point Cloud Segmentation of 3D Scenes Using Perceptual Grouping Laws},
   author={Xu, Yusheng and Hoegner, Ludwig and Tuttas, Sebastian and Stilla, Uwe},
   journal={ISPRS Annals of Photogrammetry, Remote Sensing and Spatial Information Sciences},
   volume={4},
