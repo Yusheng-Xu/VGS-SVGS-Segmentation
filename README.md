@@ -12,6 +12,7 @@ Reference:
 You can find more details about the VGS algorithm in our recent publications:
 
 ...
+
 @article{xu2017geometric,  
   title={Geometric Primitive Extraction From Point Clouds of Construction Sites Using VGS},  
   author={Xu, Yusheng and Tuttas, Sebastian and Hoegner, Ludwig and Stilla, Uwe},  
@@ -30,4 +31,5 @@ You can find more details about the VGS algorithm in our recent publications:
   volume={4},  
   year={2017}  
 }
+
 ...
