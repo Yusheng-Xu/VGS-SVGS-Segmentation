@@ -30,4 +30,15 @@ You can find more details about the VGS algorithm in our recent publications:
   volume={4},  
   year={2017}  
 }
+
+@article{xu2018voxel,
+  title={A Voxel-and Graph-Based Strategy for Segmenting Man-Made Infrastructures Using Perceptual Grouping Laws: Comparison and Evaluation},
+  author={Xu, Yusheng and Hoegner, Ludwig and Tuttas, Sebastian and Stilla, Uwe},
+  journal={Photogrammetric Engineering \& Remote Sensing},
+  volume={84},
+  number={6},
+  pages={377--391},
+  year={2018},
+  publisher={American Society for Photogrammetry and Remote Sensing}
+}
 ```
