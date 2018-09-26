@@ -2,111 +2,97 @@
 
 //The "input_vector" encodes the input parameters, you can change it according to your demands
 
+//Segmentation of points using Voxel and Graph based Segmentation, VGS
 int
-segmentationVGS(string path_name, PTXYZPtr input_cloud, std::vector<string> input_vector)
+segmentationVGS(string path_name, PCXYZPtr input_cloud, std::vector<string> input_vector)
 {
 	//Remarks
-	//pcl::console::print_highlight ("Segementing the pointclouds by the use of voxel based graph segmentation ...\n"); 
-	
+	pcl::console::print_highlight ("Segmenting the pointcloud by the use of voxel based graph segmentation ...\n"); 
+	//For the algorithm used (improved version):
+	//Xu et al.,GRSL 2017, Geometric Primitive Extraction From Point Clouds of Construction Sites Using VGS
+
 	//Parameter settings
 	string file_name;
 	float voxel_size;
 	float graph_size;
-	float sig1,sig2,sig3,sig4,sig5,sig6; 
+	float sig1, sig2, sig3, sig4, sig5, sig6;
 	float cut_thred;
 	int points_min, adjacency_min, voxels_min;
 
-	file_name=input_vector[21];
+	file_name = input_vector[21];
 	voxel_size = std::atof(input_vector[28].c_str());
 	graph_size = std::atof(input_vector[30].c_str());
-	sig1=std::atof(input_vector[32].c_str());
-	sig2=std::atof(input_vector[34].c_str());
-	sig3=std::atof(input_vector[36].c_str());
-	sig4=std::atof(input_vector[38].c_str());
-	sig5=std::atof(input_vector[40].c_str());
-	sig6=std::atof(input_vector[42].c_str());
-	cut_thred=std::atof(input_vector[44].c_str());
-	points_min=std::atoi(input_vector[46].c_str());
-	adjacency_min=std::atoi(input_vector[48].c_str());
-	voxels_min=std::atoi(input_vector[50].c_str());
+	sig1 = std::atof(input_vector[32].c_str());
+	sig2 = std::atof(input_vector[34].c_str());
+	sig3 = std::atof(input_vector[36].c_str());
+	sig4 = std::atof(input_vector[38].c_str());
+	sig5 = std::atof(input_vector[40].c_str());
+	sig6 = std::atof(input_vector[42].c_str());
+	cut_thred = std::atof(input_vector[44].c_str());
+	points_min = std::atoi(input_vector[46].c_str());
+	adjacency_min = std::atoi(input_vector[48].c_str());
+	voxels_min = std::atoi(input_vector[50].c_str());
 
-	unsigned int node_ID=0;
-	double min_x=0,min_y=0,min_z=0,max_x=0,max_y=0,max_z=0;
+	unsigned int node_ID = 0;
+	double min_x = 0, min_y = 0, min_z = 0, max_x = 0, max_y = 0, max_z = 0;
 
-	pcl::PointCloud<pcl::PointXYZRGB>::Ptr colored_cloud (new PTXYZRGB);
-	pcl::PointCloud<pcl::PointXYZRGB>::Ptr clustered_cloud (new PTXYZRGB);
-	pcl::PolygonMesh::Ptr colored_voxels (new pcl::PolygonMesh);
-	pcl::PolygonMesh::Ptr frames_voxels (new pcl::PolygonMesh);
-	pcl::PolygonMesh::Ptr Normes_voxels (new pcl::PolygonMesh);
-	pcl::PolygonMesh::Ptr clustered_voxels (new pcl::PolygonMesh);
+	//pcl::PointCloud<pcl::PointXYZRGB>::Ptr colored_cloud(new PCXYZRGB);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr clustered_cloud(new PCXYZRGB);
+	pcl::PolygonMesh::Ptr colored_voxels(new pcl::PolygonMesh);
+	pcl::PolygonMesh::Ptr frames_voxels(new pcl::PolygonMesh);
+	pcl::PolygonMesh::Ptr Normes_voxels(new pcl::PolygonMesh);
+	pcl::PolygonMesh::Ptr clustered_voxels(new pcl::PolygonMesh);
 	std::vector<pcl::PointXYZ, Eigen::aligned_allocator<pcl::PointXYZ>> voxel_centers;
 
 	//Voxelization
 	VoxelBasedSegmentation<pcl::PointXYZ> voxel_structure(voxel_size);//Building octree structure 
 	voxel_structure.setInputCloud(input_cloud); //Input point cloud to octree
 	voxel_structure.getCloudPointNum(input_cloud);
-	voxel_structure.addPointsFromInputCloud(); 
-	voxel_structure.setVoxelSize(voxel_size,points_min,voxels_min,adjacency_min);
-	voxel_structure.getBoundingBox(min_x,min_y,min_z,max_x,max_y,max_z);
-	voxel_structure.setBoundingBox(min_x,min_y,min_z,max_x,max_y,max_z);
+	voxel_structure.addPointsFromInputCloud();
+	voxel_structure.setVoxelSize(voxel_size, points_min, voxels_min, adjacency_min);
+	voxel_structure.getBoundingBox(min_x, min_y, min_z, max_x, max_y, max_z);
+	voxel_structure.setBoundingBox(min_x, min_y, min_z, max_x, max_y, max_z);
 
 	//Get center points	of all occupied voxels
 	voxel_structure.setVoxelCenters();
-	voxel_centers=voxel_structure.getVoxelCenters();
+	voxel_centers = voxel_structure.getVoxelCenters();
 	voxel_structure.getVoxelNum();
 
-	//Coloring points in voxels
-	voxel_structure.drawColorMapofPointsinVoxels(colored_cloud);
-	string file_name3=file_name;
-	file_name3=file_name3.replace(file_name3.length()-4,file_name3.length(),"_Voxels.pcd");
-	string fileoutpath_name3=path_name+file_name3;
-	pcl::io::savePCDFile(fileoutpath_name3,*colored_cloud);	
-
-
-	//Coloring frames of voxels
-	voxel_structure.drawFrameMapofVoxels(frames_voxels);
-	string file_name5=file_name;
-	file_name5=file_name5.replace(file_name5.length()-4,file_name5.length(),"_Frames.ply");
-	string fileoutpath_name5=path_name+file_name5;
-	pcl::io::savePLYFile(fileoutpath_name5,*frames_voxels);
+	////Coloring frames of voxels
+	//voxel_structure.drawFrameMapofVoxels(frames_voxels);
+	//string file_name5=file_name;
+	//file_name5=file_name5.replace(file_name5.length()-4,file_name5.length(),"_Frames.ply");
+	//string fileoutpath_name5=path_name+file_name5;
+	//pcl::io::savePLYFile(fileoutpath_name5,*frames_voxels);
 
 	//Features calculation
 	voxel_structure.calcualteVoxelCloudAttributes(input_cloud);
 
 	//Draw norms of voxels
-	voxel_structure.drawNormofVoxels(Normes_voxels);
-
-	string file_name6=file_name;
-	file_name6=file_name6.replace(file_name6.length()-4,file_name6.length(),"_Normes.ply");
-	string fileoutpath_name6=path_name+file_name6;
-	pcl::io::savePLYFile(fileoutpath_name6,*Normes_voxels);
+	//voxel_structure.drawNormofVoxels(Normes_voxels);
+	//string file_name6 = file_name;
+	//file_name6 = file_name6.replace(file_name6.length() - 4, file_name6.length(), "_Normes.ply");
+	//string fileoutpath_name6 = path_name + file_name6;
+	//pcl::io::savePLYFile(fileoutpath_name6, *Normes_voxels);
 
 	//Find adjacencies 
 	voxel_structure.findAllVoxelAdjacency(graph_size);
 
 	//Segmentation
-	voxel_structure.segmentVoxelCloudWithGraphModel(cut_thred,sig1,sig2,sig3,sig4,sig5,sig6);
+	voxel_structure.segmentVoxelCloudWithGraphModel(cut_thred, sig1, sig2, sig3, sig4, sig5, sig6);
 
 	//Output segmented color draw
+	//voxel_structure.drawColorMapofClusteredVoxels(Normes_voxels);
 	voxel_structure.drawColorMapofPointsinClusters(clustered_cloud);
 	std::vector<vector<int> > clusters_points_idx;
-	clusters_points_idx=voxel_structure.getClusterIdx();
+	clusters_points_idx = voxel_structure.getClusterIdx();
+	string file_name1 = file_name;
+	file_name1 = file_name1.replace(file_name1.length() - 4, file_name1.length(), ".pcd");
+	string fileoutpath_name1 = path_name + file_name1;
+	saveColoredClusters(fileoutpath_name1, input_cloud, clusters_points_idx);
 
-	string file_name1=file_name;
-	file_name1=file_name1.replace(file_name1.length()-4,file_name1.length(),"_Results.pcd");
-	string fileoutpath_name1=path_name+file_name1;
-	saveColoredClusters(fileoutpath_name1, input_cloud,clusters_points_idx);
-
-	string file_name2=file_name;
-	file_name2=file_name2.replace(file_name2.length()-4,file_name2.length(),"_");
-	string fileoutpath_name2=path_name+file_name2;
-	saveSegmentedClusters(fileoutpath_name2, input_cloud,clusters_points_idx, points_min);
-
-	//Output statistic
-	string file_name4=file_name;
-	file_name4=file_name4.replace(file_name4.length()-4,file_name4.length(),"_Statistic.txt");
-	string fileoutpath_name4=path_name+file_name4;
-	outputResultTxtFile(fileoutpath_name4, recordStatistic(clusters_points_idx, points_min));
+	//Visualization
+	showColoredClusters(fileoutpath_name1, input_cloud, clusters_points_idx);
 
 	return(0);
 }
