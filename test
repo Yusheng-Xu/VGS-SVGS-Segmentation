@@ -58,22 +58,8 @@ segmentationVGS(string path_name, PCXYZPtr input_cloud, std::vector<string> inpu
 	voxel_centers = voxel_structure.getVoxelCenters();
 	voxel_structure.getVoxelNum();
 
-	////Coloring frames of voxels
-	//voxel_structure.drawFrameMapofVoxels(frames_voxels);
-	//string file_name5=file_name;
-	//file_name5=file_name5.replace(file_name5.length()-4,file_name5.length(),"_Frames.ply");
-	//string fileoutpath_name5=path_name+file_name5;
-	//pcl::io::savePLYFile(fileoutpath_name5,*frames_voxels);
-
 	//Features calculation
 	voxel_structure.calcualteVoxelCloudAttributes(input_cloud);
-
-	//Draw norms of voxels
-	//voxel_structure.drawNormofVoxels(Normes_voxels);
-	//string file_name6 = file_name;
-	//file_name6 = file_name6.replace(file_name6.length() - 4, file_name6.length(), "_Normes.ply");
-	//string fileoutpath_name6 = path_name + file_name6;
-	//pcl::io::savePLYFile(fileoutpath_name6, *Normes_voxels);
 
 	//Find adjacencies 
 	voxel_structure.findAllVoxelAdjacency(graph_size);
@@ -82,7 +68,6 @@ segmentationVGS(string path_name, PCXYZPtr input_cloud, std::vector<string> inpu
 	voxel_structure.segmentVoxelCloudWithGraphModel(cut_thred, sig1, sig2, sig3, sig4, sig5, sig6);
 
 	//Output segmented color draw
-	//voxel_structure.drawColorMapofClusteredVoxels(Normes_voxels);
 	voxel_structure.drawColorMapofPointsinClusters(clustered_cloud);
 	std::vector<vector<int> > clusters_points_idx;
 	clusters_points_idx = voxel_structure.getClusterIdx();
