@@ -5,7 +5,7 @@ Environment:
 The code is written in C++ and tested in VS2015.
 
 Dependence:
-The code depends on the following third party libraries:
+The code depends on the following third-party libraries:
 -PCL 1.8.1.
 
 Special thanks to Dong Lin from TU Dresden!
