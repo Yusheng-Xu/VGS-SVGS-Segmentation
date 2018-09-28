@@ -8,10 +8,10 @@ Dependence:
 The code depends on the following third party libraries:
 -PCL 1.8.1.
 
+Special thanks to Dong Lin from TU Dresden!
+
 Reference:
 You can find more details about the VGS algorithm in our recent publications:
-
-Special thanks to Dong Lin from TU Dresden!
 
 ```
 @article{xu2017geometric,  
