@@ -11,9 +11,8 @@ The code depends on the following third-party libraries:
 Special thanks to Dong Lin from TU Dresden!
 
 How to use these codes：-> please refer to "Use_Test"
--The "input_vector" encodes the input parameters, you can change it according to your demands
--See： Task_File_VGS.txt  Task_File_SVGS.txt
--Testing dataset (Town_Test.pcd) is cropped from ETH Zurich dataset： http://semantic3d.net/
+
+The "input_vector" encodes the input parameters (see "Task_File_VGS.txt" and "Task_File_SVGS.txt"), you can change it according to your demands Testing dataset (Town_Test.pcd) is cropped from ETH Zurich dataset： http://semantic3d.net/
 
 Reference:
 You can find more details about the VGS/SVGS algorithm in our recent publications:
