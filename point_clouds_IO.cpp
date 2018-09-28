@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
-//  File:		 point_cloud_IO.cpp
-//  Author:		 Yusheng Xu, PF_Technische Universitaet Muenchen (yusheng.xu@tum.de)
+//  File:        point_cloud_IO.cpp
+//  Author:      Yusheng Xu, PF_Technische Universitaet Muenchen (yusheng.xu@tum.de)
 //  Description: IO operation of the point clouds
 //  Modified:    28.4.2018
 //
