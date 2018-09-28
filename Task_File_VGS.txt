@@ -1,0 +1,56 @@
+//////////////////////////////////////////////////////////////////////////////// 1
+//  File:	  Task_File_VGS.txt  
+//  Author:       Yusheng Xu, TUM_PF (yusheng.xu@tum.de)
+//  Description:  Task file for the point cloud segmentation
+//  Modified:     10.06.2016
+//  Copyright (c) 2015-2018  Yusheng Xu (yusheng.xu@tum.de)
+//////////////////////////////////////////////////////////////////////////////// 
+Seg
+//Tasks 9 
+VGS segmentation, 10th.June 2017
+
+//Input path 		12
+D:\\Research\\SV\\Test\\
+
+//Input name 		15
+Town_Test.pcd
+
+//Output path 		18
+D:\\Research\\SV\\Test\\
+
+//Output name 		21
+Town_Test_VGS.pcd
+
+//Method 24
+2
+
+//Parameters 		 27
+voxel_size 		 28
+0.15
+graph_size   		 30
+0.5
+sig_p: Proximity         32
+0.2
+sig_n: Normal angle   
+0.2
+sig_o: Stair-like   
+0.2
+sig_e: Similarity 
+0.2
+sig_c: Convexity
+0.2
+sig_weight:
+2
+cut_thred    44
+0.3
+points_min
+10
+adjacency_min  48
+3
+voxels_min
+3
+
+D:\Research\SV\Test\Task_File_VGS.txt
+
+
+
