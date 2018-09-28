@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
-//	File:		 voxel_segmentation.h
-//	Author:		 Yusheng Xu, PF_Technische Universitaet Muechen (yusheng.xu@tum.de)
-//	Description: The voxel based segmentation for point cloud 
+//  File:		 voxel_segmentation.h
+//  Author:		 Yusheng Xu, PF_Technische Universitaet Muechen (yusheng.xu@tum.de)
+//  Description: The voxel based segmentation for point cloud 
 //  Modified:    27.05.2018, By Dong Lin, TU Dresden, bugs fixed
 //
 //  Copyright (c) 2015-2018  Yusheng Xu (yusheng.xu@tum.de)
