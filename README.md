@@ -1,5 +1,5 @@
 # Voxel- and graph-based point-cloud-segmentation
-This is the source code for the algorithm of Voxel and Graph-based Segmentation (VGS).
+This is the source code for the algorithm of Voxel- and Graph-based Segmentation (VGS/SVGS).
 
 Environment:
 The code is written in C++ and tested in VS2015.
