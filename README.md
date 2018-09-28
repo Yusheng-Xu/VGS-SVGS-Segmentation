@@ -11,7 +11,7 @@ The code depends on the following third-party libraries:
 Special thanks to Dong Lin from TU Dresden!
 
 Reference:
-You can find more details about the VGS algorithm in our recent publications:
+You can find more details about the VGS/SVGS algorithm in our recent publications:
 
 ```
 @article{xu2017geometric,  
