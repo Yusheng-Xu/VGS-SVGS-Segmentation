@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
-//	File:		 supervoxel_segmentation.cpp
-//	Author:		 Yusheng Xu, PF_Technische Universitaet Muechen (yusheng.xu@tum.de)
-//	Description: The voxel based segmentation for point cloud 
+//  File:		 supervoxel_segmentation.cpp
+//  Author:		 Yusheng Xu, PF_Technische Universitaet Muechen (yusheng.xu@tum.de)
+//  Description: The voxel based segmentation for point cloud 
 //  Modified:    5.6.2016
 //
 //  Copyright (c) 2016  Yusheng Xu (yusheng.xu@tum.de)
