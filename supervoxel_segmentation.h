@@ -197,7 +197,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 				pcl::octree::OctreeKey leaf_key;
 				leaf_key=iter_leaf.getCurrentOctreeKey();
 
-				// ¸ù¾İ leaf node ±àºÅ, voxel·Ö±æÂÊ ÒÔ¼° boundaryµÄX,Y,ZµÄ×îĞ¡ÖµÈ·¶¨ ¸Ã leaf node µãµÄ¿Õ¼ä×ø±ê
+				// æ ¹æ® leaf node ç¼–å·, voxelåˆ†è¾¨ç‡ ä»¥åŠ boundaryçš„X,Y,Zçš„æœ€å°å€¼ç¡®å®š è¯¥ leaf node ç‚¹çš„ç©ºé—´åæ ‡
 				this->getVoxelCenterFromOctreeKey(leaf_key, node_center);     
 				this->voxel_centers_.push_back(node_center);					//Center of the voxel
 
@@ -206,8 +206,8 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 				points_idx=iter_leaf.getLeafContainer().getPointIndicesVector();
 				this->voxels_point_idx_.push_back(points_idx);
 
-				// ¸ù¾İ voxel ·¶Î§ÄÚµãµÄ×ø±ê(X, Y, Z)Æ½¾ùÖµ, µÃµ½Ã¿¸öÌåËØµÄÖÊĞÄÎ»ÖÃ
-				//Calculate the centroid of the voxel (ÖÊĞÄ)
+				// æ ¹æ® voxel èŒƒå›´å†…ç‚¹çš„åæ ‡(X, Y, Z)å¹³å‡å€¼, å¾—åˆ°æ¯ä¸ªä½“ç´ çš„è´¨å¿ƒä½ç½®
+				//Calculate the centroid of the voxel (è´¨å¿ƒ)
 				int voxel_points_num=points_idx.size();
 				for (int i=0;i<voxel_points_num;i++)
 				{
@@ -261,7 +261,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 			std::vector<vector<int> > supervoxels_points_idx;
 
 			//Creat supervoxel structure
-			//Ô´×Ô Papon CVPR 2013 µÄÊµÏÖ, ºÃÏñ²»ÄÜµ÷, Ö»ÄÜºóĞø·ÖÎö½á¹û...
+			//æºè‡ª Papon CVPR 2013 çš„å®ç°, å¥½åƒä¸èƒ½è°ƒ, åªèƒ½åç»­åˆ†æç»“æœ...
 			pcl::SupervoxelClustering<pcl::PointXYZRGBA> super (this->voxel_resolution_, this->seed_resolution_);
 
 			super.setInputCloud (data_cloud);
@@ -269,7 +269,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 			super.setSpatialImportance (this->spatial_impt_);
 			super.setNormalImportance (this->normal_impt_);
 
-			// map µÄÔªËØÒÔ (key-value) ¶ÔµÄĞÎÊ½´æÖü
+			// map çš„å…ƒç´ ä»¥ (key-value) å¯¹çš„å½¢å¼å­˜è´®
 			std::map <uint32_t, pcl::Supervoxel<pcl::PointXYZRGBA>::Ptr > supervoxel_clusters;
 
 			//Oversegmentation using supervoxel
@@ -279,7 +279,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 			pcl::console::print_info ("Found %d supervoxels\n", supervoxel_clusters.size ());
 			
 			//Record points and voxels of each supervoxel
-			// labeled_points_cloud->points[µãºÅ].label 
+			// labeled_points_cloud->points[ç‚¹å·].label 
 			pcl::PointCloud<pcl::PointXYZL>::Ptr labeled_points_cloud = super.getLabeledCloud ();
 			int max_label=super.getMaxLabel();
 			int size_labeled_points=labeled_points_cloud->points.size();
@@ -295,7 +295,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 			}
 
 			//Traverse all the points
-			// points_label_ [µãºÅ] ±íÊ¾ label
+			// points_label_ [ç‚¹å·] è¡¨ç¤º label
 			int point_label;
 			for (int j = 0; j < size_labeled_points; j++)
 			{
@@ -308,7 +308,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 			}
 
 			//Mapping the index between supervoxels, voxels, and points
-			// points_label_map [label] ±íÊ¾ Ò»¶ÑµãºÅ
+			// points_label_map [label] è¡¨ç¤º ä¸€å †ç‚¹å·
 			int temp_sv_num=0;
 			for(int k=0;k<max_label;k++)
 			{
@@ -316,7 +316,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 				{
 					supervoxels_point_idx_.push_back(points_label_map[k]);
 					supervoxels_label_.push_back(labeled_points_cloud->points[points_label_map[k][0]].label);
-					// supervoxels_label_.push_back(k); ¸úÉÏÃæµÄ½á¹ûÓ¦¸ÃÒ»Ñù....
+					// supervoxels_label_.push_back(k); è·Ÿä¸Šé¢çš„ç»“æœåº”è¯¥ä¸€æ ·....
 					temp_sv_num++;
 				}
 			}
@@ -348,7 +348,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 				}
 			}
 
-			//// µãÔÆÂşÓÎÏÔÊ¾
+			//// ç‚¹äº‘æ¼«æ¸¸æ˜¾ç¤º
 			//boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer(new pcl::visualization::PCLVisualizer("3D Viewer"));
 			//viewer->setBackgroundColor(0, 0, 0);
 			//viewer->addPointCloud<pcl::PointXYZRGB>(supervoxel_cloud, "supervoxel_cloud");
@@ -779,7 +779,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 			float eig_e1=0,eig_e2=0,eig_e3=0;
 			//float *features=new float[8];
 
-			// ×Ô¼º¹¹ÔìºÃĞ­·½²î¾ØÕó¾ÍºÃ, ÌØÕ÷ÖµºÍÌØÕ÷ÏòÁ¿µÄ¼ÆËãÓÃEigen¿âÖĞ×Ô´ø¾ÍºÃ
+			// è‡ªå·±æ„é€ å¥½åæ–¹å·®çŸ©é˜µå°±å¥½, ç‰¹å¾å€¼å’Œç‰¹å¾å‘é‡çš„è®¡ç®—ç”¨Eigenåº“ä¸­è‡ªå¸¦å°±å¥½
 			//Weighted corvarance matrix
 			//this->calculateWeightedCorvariance(input_cloud,cor_matrix);
 			this->calculateCorvariance(input_cloud,cor_matrix);
@@ -788,7 +788,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 			pcl::eigen33 (*cor_matrix, eig_vectors, eig_values);
 
 			//Eigen values (normalized)
-			//Ò»¹²°ËÎ¬ÌØÕ÷...ÍêÈ«°´ÕÕ Weinmann 2015 ISPRS ÎÄÕÂÉÏÃæµÄÌØÕ÷
+			//ä¸€å…±å…«ç»´ç‰¹å¾...å®Œå…¨æŒ‰ç…§ Weinmann 2015 ISPRS æ–‡ç« ä¸Šé¢çš„ç‰¹å¾
 			if(eig_values[0]==0 && eig_values[1]==0 && eig_values[2]==0)
 			{
 				for(int i=0;i<8;i++)
@@ -798,19 +798,19 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 			}
 			else
 			{
-				//e1>e2>e3 (ÅÜ³ÌĞòÊ±¼ì²éÏÂÊÇ·ñÂú×ãÕâ¸ö¹æÂÉ...)
+				//e1>e2>e3 (è·‘ç¨‹åºæ—¶æ£€æŸ¥ä¸‹æ˜¯å¦æ»¡è¶³è¿™ä¸ªè§„å¾‹...)
 				eig_e3=(float)eig_values[0]/sqrt(pow(eig_values[0],2)+pow(eig_values[1],2)+pow(eig_values[2],2));
 				eig_e2=(float)eig_values[1]/sqrt(pow(eig_values[0],2)+pow(eig_values[1],2)+pow(eig_values[2],2));
 				eig_e1=(float)eig_values[2]/sqrt(pow(eig_values[0],2)+pow(eig_values[1],2)+pow(eig_values[2],2));
 
 
 				//Feature calculation
-				if(eig_e1==0) // e1 Ó¦¸ÃÊÇ×î´óµÄ???
+				if(eig_e1==0) // e1 åº”è¯¥æ˜¯æœ€å¤§çš„???
 				{
 					output_features.push_back(float(0));//Linearity
 					output_features.push_back(float(1));//Planarity
 					output_features.push_back(float(0));//Scattering
-					output_features.push_back(float(0));//Anisotropy ¸÷ÏòÒìĞÔ
+					output_features.push_back(float(0));//Anisotropy å„å‘å¼‚æ€§
 				}
 				else
 				{
@@ -818,11 +818,11 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 					output_features.push_back(float(eig_e2-eig_e3)/eig_e1);//Planarity
 					output_features.push_back(float(eig_e3)/eig_e1);//Scattering or Sphericity
 					output_features.push_back(float(eig_e1 - eig_e3) / eig_e1);//Anisotropy 
-					// ²é Weinmann (2015) ISPRS: ÕıÈ·ĞÎÊ½ÈçÉÏ, Ô­´íÎó´úÂë (e1 - e3) / e2 
+					// æŸ¥ Weinmann (2015) ISPRS: æ­£ç¡®å½¢å¼å¦‚ä¸Š, åŸé”™è¯¯ä»£ç  (e1 - e3) / e2 
 				}
 
 				output_features.push_back(float(eig_e3)/(eig_e1+eig_e2+eig_e3));//Change of curvature or Surface variation
-				// ²é Weinmann (2015) ISPRS: ÕıÈ·ĞÎÊ½ÈçÉÏ, Ô­´íÎó´úÂë float(eig_e1)/(eig_e1+eig_e2+eig_e3)
+				// æŸ¥ Weinmann (2015) ISPRS: æ­£ç¡®å½¢å¼å¦‚ä¸Š, åŸé”™è¯¯ä»£ç  float(eig_e1)/(eig_e1+eig_e2+eig_e3)
 
 				if(eig_e1*eig_e2*eig_e3==0)
 				{
@@ -1023,7 +1023,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 			output_normal.normal_z=eig_vectors(2,0);
 
 			//Direction judgement
-			//Ç¿ÖÆÈÃ ÊÓÏòÁ¿ Óë ÌåËØ·¨ÏòÁ¿ Í¬Ïò...
+			//å¼ºåˆ¶è®© è§†å‘é‡ ä¸ ä½“ç´ æ³•å‘é‡ åŒå‘...
 			if((output_normal.normal_x*view_point.x+output_normal.normal_y*view_point.y+output_normal.normal_z*view_point.z)<0)
 			{
 				output_normal.normal_x=output_normal.normal_x*-1;
@@ -1421,7 +1421,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 					cor_sum=cor_sum+cor_single;
 				}
 
-				//ÀíÂÛÉÏÓ¦¸Ã³ıÒÔµãµÄÊıÁ¿
+				//ç†è®ºä¸Šåº”è¯¥é™¤ä»¥ç‚¹çš„æ•°é‡
 				cor_sum = cor_sum / num_support;
 			}
 			else
@@ -1759,7 +1759,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 			//Parameters and settings
 			std::vector<float> similarity_dist;
 			
-			// ³õÊ¼»¯Ò»¸öºÜ´óµÄÖµ, ÕâÑùµ±Åöµ½ºÜĞ¡µÄµã¼¯Ê±, ¿ÉÒÔÖ±½Ó¸³ºÜ´óµÄ¾àÀëÖµ¸øÕâĞ©±äÁ¿....
+			// åˆå§‹åŒ–ä¸€ä¸ªå¾ˆå¤§çš„å€¼, è¿™æ ·å½“ç¢°åˆ°å¾ˆå°çš„ç‚¹é›†æ—¶, å¯ä»¥ç›´æ¥èµ‹å¾ˆå¤§çš„è·ç¦»å€¼ç»™è¿™äº›å˜é‡....
 			float dist_space = 100;	//S: space distance
 			float dist_angle = 100;	//A: norm angles
 			float dist_stair = 100;	//T: stair effect
@@ -1790,7 +1790,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 					norm_v2_v1.push_back((v2_center[1]-v1_center[1])/dist_v1_v2);
 					norm_v2_v1.push_back((v2_center[2]-v1_center[2])/dist_v1_v2);
 
-					// X1¡ÁX2
+					// X1Ã—X2
 					product_v1_v2.clear();
 					product_v1_v2.push_back(v1_center[1]*v2_center[2]-v1_center[2]*v2_center[1]);
 					product_v1_v2.push_back(v1_center[2]*v2_center[0]-v1_center[0]*v2_center[2]);
@@ -1806,7 +1806,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 					cos_v1_v2 = (v1_norm[0] * v2_norm[0] + v1_norm[1] * v2_norm[1] + v1_norm[2] * v2_norm[2]); // <N1,N2>
 					cos_v1_dist = (v1_norm[0] * norm_v1_v2[0] + v1_norm[1] * norm_v1_v2[1] + v1_norm[2] * norm_v1_v2[2]); // <N1,d>
 					cos_v2_dist = (v2_norm[0] * norm_v1_v2[0] + v2_norm[1] * norm_v1_v2[1] + v2_norm[2] * norm_v1_v2[2]); // <N2,d>
-					cos_d_s = (product_v1_v2[0] * norm_v1_v2[0] + product_v1_v2[1] * norm_v1_v2[1] + product_v1_v2[2] * norm_v1_v2[2]); //<X1¡ÁX2,d>
+					cos_d_s = (product_v1_v2[0] * norm_v1_v2[0] + product_v1_v2[1] * norm_v1_v2[1] + product_v1_v2[2] * norm_v1_v2[2]); //<X1Ã—X2,d>
 
 					a_1 = acos(cos_v1_dist); // alpha1
 					a_2 = acos(cos_v2_dist); // alpha2
@@ -1850,7 +1850,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 				}
 			}
 
-			//Eigen features similarity (ÕâÀïÀ´¿´ÆäÊµ¾ÍÓÃµã»ıµÄ·½·¨,²¢Ã»ÓĞÓÃ histogram intersection kernel )
+			//Eigen features similarity (è¿™é‡Œæ¥çœ‹å…¶å®å°±ç”¨ç‚¹ç§¯çš„æ–¹æ³•,å¹¶æ²¡æœ‰ç”¨ histogram intersection kernel )
 			if(v1_eigen.size()>1 && v2_eigen.size()>1)  
 			{
 				float eigen_diff=0, eigen_cos=0, eigen_abs1=0, eigen_abs2=0; 
@@ -1928,7 +1928,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 			}
 			sort(weight_index_array.begin(), weight_index_array.end(), godown); // riseup
 
-			//Sort, descending £¨bug: sorted_idx is not correct£©
+			//Sort, descending ï¼ˆbug: sorted_idx is not correctï¼‰
 			/*for (int i = 0; i < weight_size; i++) 
 			{
 				original_idx.push_back(i);
@@ -1971,11 +1971,11 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 				seg_int.push_back(initial_thrd);	// Initial of mint
 			}
 
-			// ±ßÈ¨Öµ´Ó´óµ½Ğ¡½øĞĞºÏ²¢...
-			// seg_ver_idx [ÃæºÅ]: µ±Ç°Ãæ°üº¬µÄËùÓĞµã
-			// ver_seg_idx [µãºÅ]: µ±Ç°µãËùÊôµÄÃæÆ¬
-			// seg_size [ÃæºÅ]: µ±Ç°Ãæ¾ßÓĞµãµÄÊıÁ¿
-			// seg_int [ÃæºÅ]: µ±Ç°ÃæµÄÒìÖÊĞÔ²â¶È(³õÊ¼ÖµÊÇ 1, )
+			// è¾¹æƒå€¼ä»å¤§åˆ°å°è¿›è¡Œåˆå¹¶...
+			// seg_ver_idx [é¢å·]: å½“å‰é¢åŒ…å«çš„æ‰€æœ‰ç‚¹
+			// ver_seg_idx [ç‚¹å·]: å½“å‰ç‚¹æ‰€å±çš„é¢ç‰‡
+			// seg_size [é¢å·]: å½“å‰é¢å…·æœ‰ç‚¹çš„æ•°é‡
+			// seg_int [é¢å·]: å½“å‰é¢çš„å¼‚è´¨æ€§æµ‹åº¦(åˆå§‹å€¼æ˜¯ 1, )
 			for (int i = 0; i < weight_size; i++) 
 			{
 				float w_temp, thred_temp;
@@ -2033,12 +2033,12 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 				{
 					for(int j=0; j<seg_ver_idx[i].size(); j++)
 					{
-						// Áî seg_ver_idx[i][j]==0 µÄÒâË¼ÊÇÕÒµ½µ±Ç°Í¼Ä£ĞÍÖĞº¬ÓĞÖĞĞÄÌåËØµÄÍ¼Ä£ĞÍ
-						// ÒòÎªÊµ¼ÊÇé¿öÏÂ, ¸ÃÍ¼Ä£ĞÍ¿ÉÄÜº¬ÓĞ¶à¸ö²»ÏàÁ¬µÄÍ¼Ä£ĞÍ, ÆäÖĞÒ»°ã×î´óµÄÄÇ¸öº¬ÓĞÄ¿±êÌåËØ...
+						// ä»¤ seg_ver_idx[i][j]==0 çš„æ„æ€æ˜¯æ‰¾åˆ°å½“å‰å›¾æ¨¡å‹ä¸­å«æœ‰ä¸­å¿ƒä½“ç´ çš„å›¾æ¨¡å‹
+						// å› ä¸ºå®é™…æƒ…å†µä¸‹, è¯¥å›¾æ¨¡å‹å¯èƒ½å«æœ‰å¤šä¸ªä¸ç›¸è¿çš„å›¾æ¨¡å‹, å…¶ä¸­ä¸€èˆ¬æœ€å¤§çš„é‚£ä¸ªå«æœ‰ç›®æ ‡ä½“ç´ ...
 						if(seg_ver_idx[i][j]==0)
 						{
 							seg_con=i;
-							// ¸Ğ¾õÕÒµ½ÁË¾Í¿ÉÒÔ²»Í¬¼ÌĞøÑ­»·ÁË....
+							// æ„Ÿè§‰æ‰¾åˆ°äº†å°±å¯ä»¥ä¸åŒç»§ç»­å¾ªç¯äº†....
 							break;
 						}
 					}
@@ -2164,7 +2164,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 								if(this->supervoxels_connect_idx_[search_idx][k]==find_idx)
 								{
 									find_ornot=true;
-									// ¸Ğ¾õËÑË÷µ½ÁË¾Í²»ÓÃÔÙËÑË÷ÁË...
+									// æ„Ÿè§‰æœç´¢åˆ°äº†å°±ä¸ç”¨å†æœç´¢äº†...
 									break;
 								}						
 							}
@@ -2279,7 +2279,7 @@ typedef  pcl::PointCloud<pcl::Normal> PTNORM;
 
 
 								dist_vector = measuringDistance(voxel1_position, voxel2_position, voxel1_normal, voxel2_normal, voxel1_eigen, voxel2_eigen);
-								// ²âÁ¿±ßÈ¨ÖµµÄ·½·¨ÓĞËù²»Í¬
+								// æµ‹é‡è¾¹æƒå€¼çš„æ–¹æ³•æœ‰æ‰€ä¸åŒ
 								temp_dis = distanceWeight(dist_vector, sig_p, sig_n, sig_o, sig_e, sig_c, sig_weight);
 
 								if (temp_dis >= min_dis)
