@@ -1,6 +1,9 @@
-//Segmentation of points using Voxel and Graph based Segmentation
+//Segmentation of points using Voxel- and Graph-based Segmentation
 
 //The "input_vector" encodes the input parameters, you can change it according to your demands
+//See： Task_File_VGS.txt  Task_File_SVGS.txt
+
+//Testing dataset (Town_Test.pcd) is cropped from ETH Zurich dataset： Semantic3D
 
 //Segmentation of points using Voxel and Graph based Segmentation, VGS
 int
