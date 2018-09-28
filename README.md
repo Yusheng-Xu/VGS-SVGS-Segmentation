@@ -6,10 +6,12 @@ The code is written in C++ and tested in VS2015.
 
 Dependence:
 The code depends on the following third party libraries:
--PCL 1.8.0.
+-PCL 1.8.1.
 
 Reference:
 You can find more details about the VGS algorithm in our recent publications:
+
+Special thanks to Dong Lin from TU Dresden!
 
 ```
 @article{xu2017geometric,  
