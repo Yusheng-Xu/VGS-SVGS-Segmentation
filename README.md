@@ -1,21 +1,21 @@
 # Voxel- and graph-based point-cloud-segmentation
 This is the source code for the algorithm of Voxel- and Graph-based Segmentation (VGS/SVGS).
 
-## Environment:
+### Environment:
 The code is written in C++ and tested in VS2015.
 
-## Dependence:
+### Dependence:
 The code depends on the following third-party libraries:
 -PCL 1.8.1.
 
-## How to use these codes：
+### How to use these codes：
 please refer to "Use_Test"
 
 The "input_vector" encodes the input parameters (see "Task_File_VGS.txt" and "Task_File_SVGS.txt"), you can change it according to your demands.
 
 Special thanks to Dong Lin from TU Dresden for correcting bugs in the codes!
 
-## Reference:
+### Reference:
 
 Testing dataset (Town_Test.pcd) is cropped from ETH Zurich dataset： http://semantic3d.net/
 
