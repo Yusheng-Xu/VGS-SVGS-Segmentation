@@ -13,7 +13,7 @@ please refer to "Use_Test"
 
 The "input_vector" encodes the input parameters (see "Task_File_VGS.txt" and "Task_File_SVGS.txt"), you can change it according to your demands.
 
-Special thanks to Dong Lin from TU Dresden for correcting bugs in the codes!
+Special thanks to [Dong Lin from TU Dresden](https://tu-dresden.de/bu/umwelt/geo/ipf/photogrammetrie/die-professur/beschaeftigte) for correcting bugs in the codes!
 
 ### Reference:
 
