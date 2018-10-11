@@ -23,7 +23,7 @@ You can find more details about the VGS/SVGS algorithm in our recent publication
 
 ```
 @article{xu2017geometric,  
-  title={Geometric Primitive Extraction From Point Clouds of Construction Sites Using VGS},  
+  title={Geometric primitive extraction from point clouds of construction sites using VGS},  
   author={Xu, Yusheng and Tuttas, Sebastian and Hoegner, Ludwig and Stilla, Uwe},  
   journal={IEEE Geoscience and Remote Sensing Letters},    
   volume={14},  
@@ -34,7 +34,7 @@ You can find more details about the VGS/SVGS algorithm in our recent publication
 }
 
 @article{xu2017voxel,  
-  title={Voxel- and Graph-Based Point Cloud Segmentation of 3D Scenes Using Perceptual Grouping Laws},  
+  title={Voxel- and graph-based point cloud segmentation of 3d scenes using perceptual grouping laws},  
   author={Xu, Yusheng and Hoegner, Ludwig and Tuttas, Sebastian and Stilla, Uwe},  
   journal={ISPRS Annals of Photogrammetry, Remote Sensing and Spatial Information Sciences},  
   volume={4},  
@@ -42,7 +42,7 @@ You can find more details about the VGS/SVGS algorithm in our recent publication
 }
 
 @article{xu2018voxel,
-  title={A Voxel-and Graph-Based Strategy for Segmenting Man-Made Infrastructures Using Perceptual Grouping Laws: Comparison and Evaluation},
+  title={A voxel- and graph-based strategy for segmenting man-made infrastructures using perceptual grouping laws: comparison and evaluation},
   author={Xu, Yusheng and Hoegner, Ludwig and Tuttas, Sebastian and Stilla, Uwe},
   journal={Photogrammetric Engineering \& Remote Sensing},
   volume={84},
