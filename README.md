@@ -32,15 +32,6 @@ You can find more details about the VGS/SVGS algorithm in our recent publication
   year={2017},  
   publisher={IEEE}  
 }
-
-@article{xu2017voxel,  
-  title={Voxel- and graph-based point cloud segmentation of 3d scenes using perceptual grouping laws},  
-  author={Xu, Yusheng and Hoegner, Ludwig and Tuttas, Sebastian and Stilla, Uwe},  
-  journal={ISPRS Annals of Photogrammetry, Remote Sensing and Spatial Information Sciences},  
-  volume={4},  
-  year={2017}  
-}
-
 @article{xu2018voxel,
   title={A voxel- and graph-based strategy for segmenting man-made infrastructures using perceptual grouping laws: comparison and evaluation},
   author={Xu, Yusheng and Hoegner, Ludwig and Tuttas, Sebastian and Stilla, Uwe},
